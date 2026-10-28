@@ -1,0 +1,12 @@
+{
+  "xdtMaker": {
+    "builtinTools": {
+      "wechat": {
+        "enabled": false
+      },
+      "slack": {
+        "enabled": false
+      }
+    }
+  }
+}

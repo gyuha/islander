@@ -1,0 +1,95 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://scenes/world/island.tscn" id="2_island"]
+[ext_resource type="PackedScene" path="res://scenes/world/water.tscn" id="3_water"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="4_player"]
+[ext_resource type="PackedScene" path="res://scenes/player/camera_rig.tscn" id="5_rig"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="6_hud"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy_spawner.gd" id="7_spawner"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/slime.tscn" id="8_slime"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/crab.tscn" id="9_crab"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
+sky_top_color = Color(0.5569, 0.8275, 0.8784, 1)
+sky_horizon_color = Color(0.7882, 0.9333, 0.9412, 1)
+ground_bottom_color = Color(0.2784, 0.6510, 0.5765, 1)
+ground_horizon_color = Color(0.7882, 0.9333, 0.9412, 1)
+
+[sub_resource type="Sky" id="Sky_main"]
+sky_material = SubResource("ProceduralSkyMaterial_sky")
+
+[sub_resource type="Environment" id="Environment_main"]
+background_mode = 2
+sky = SubResource("Sky_main")
+ambient_light_source = 2
+ambient_light_color = Color(0.8118, 0.9294, 0.9176, 1)
+ambient_light_energy = 0.48
+tonemap_mode = 2
+tonemap_exposure = 0.95
+tonemap_white = 6.0
+ssao_enabled = true
+ssao_radius = 1.6
+ssao_intensity = 3.2
+ssao_power = 1.5
+ssao_detail = 0.5
+ssao_horizon = 0.06
+ssao_sharpness = 0.98
+ssao_light_affect = 0.3
+ssao_ao_channel_affect = 0.0
+ssil_enabled = false
+sdfgi_enabled = false
+glow_enabled = true
+glow_levels/1 = 0.0
+glow_levels/2 = 0.0
+glow_levels/3 = 1.0
+glow_levels/4 = 1.0
+glow_levels/5 = 1.0
+glow_levels/6 = 0.0
+glow_levels/7 = 0.0
+glow_intensity = 0.4
+glow_strength = 1.0
+glow_bloom = 0.05
+glow_blend_mode = 2
+glow_hdr_threshold = 1.0
+fog_enabled = false
+volumetric_fog_enabled = false
+adjustment_enabled = true
+adjustment_brightness = 1.0
+adjustment_contrast = 1.1
+adjustment_saturation = 1.12
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_main")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_main")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-50, -25, 0)
+light_color = Color(1.0000, 0.9529, 0.8706, 1)
+light_energy = 1.0
+shadow_enabled = true
+shadow_blur = 3.0
+directional_shadow_mode = 2
+directional_shadow_max_distance = 60.0
+
+[node name="Island" parent="." instance=ExtResource("2_island")]
+
+[node name="Water" parent="." instance=ExtResource("3_water")]
+
+[node name="Player" parent="." instance=ExtResource("4_player")]
+island_path = NodePath("../Island")
+camera_rig_path = NodePath("../CameraRig")
+
+[node name="CameraRig" parent="." instance=ExtResource("5_rig")]
+target_path = NodePath("../Player")
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="EnemySpawner" type="Node3D" parent="."]
+script = ExtResource("7_spawner")
+slime_scene = ExtResource("8_slime")
+crab_scene = ExtResource("9_crab")
+
+[node name="HUD" parent="." instance=ExtResource("6_hud")]

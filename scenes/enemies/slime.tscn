@@ -1,0 +1,27 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/slime.gd" id="1_slime"]
+[ext_resource type="Script" path="res://scripts/vendor/gdskills/smart_navigation_agent.gd" id="2_nav"]
+[ext_resource type="PackedScene" path="res://assets/models/slime/slime.glb" id="3_model"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1"]
+radius = 0.35
+
+[node name="Slime" type="CharacterBody3D" groups=["enemy", "night_enemy"]]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_slime")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.35, 0)
+shape = SubResource("SphereShape3D_1")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Model" parent="Visual" instance=ExtResource("3_model")]
+
+[node name="Nav" type="NavigationAgent3D" parent="."]
+script = ExtResource("2_nav")
+
+[node name="RepathTimer" type="Timer" parent="."]
+wait_time = 0.2

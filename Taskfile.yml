@@ -1,0 +1,47 @@
+version: '3'
+
+vars:
+  GODOT: godot
+
+tasks:
+  default:
+    desc: 게임 실행
+    cmds:
+      - task: run
+
+  run:
+    desc: 게임 실행
+    cmds:
+      - '{{.GODOT}} --path .'
+
+  editor:
+    desc: Godot 에디터 열기
+    cmds:
+      - '{{.GODOT}} -e --path .'
+
+  import:
+    desc: 에셋 임포트 (헤드리스)
+    cmds:
+      - '{{.GODOT}} --headless --path . --import'
+
+  test:
+    desc: 헤드리스 테스트 실행
+    cmds:
+      - '{{.GODOT}} --headless --path . -s tests/run_tests.gd'
+
+  smoke:
+    desc: 헤드리스로 600프레임 실행 (섬 생성 포함)
+    cmds:
+      - '{{.GODOT}} --headless --path . --quit-after 600'
+
+  check:
+    desc: import → 테스트 → 600프레임 실행
+    cmds:
+      - task: import
+      - task: test
+      - task: smoke
+
+  capture:
+    desc: 낮·섬 전체·밤 스크린샷을 captures/에 저장 (창이 열림)
+    cmds:
+      - '{{.GODOT}} --path . -- --capture'

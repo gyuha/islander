@@ -1,0 +1,50 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/island_generator.gd" id="1_gen"]
+[ext_resource type="PackedScene" path="res://scenes/world/pine_tree.tscn" id="2_pine"]
+[ext_resource type="PackedScene" path="res://scenes/world/palm_tree.tscn" id="3_palm"]
+[ext_resource type="PackedScene" path="res://scenes/world/rock.tscn" id="4_rock"]
+[ext_resource type="PackedScene" path="res://scenes/world/berry_bush.tscn" id="5_bush"]
+[ext_resource type="PackedScene" path="res://scenes/world/boat.tscn" id="6_boat"]
+[ext_resource type="PackedScene" path="res://scenes/world/buoy.tscn" id="7_buoy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_terrain"]
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+roughness = 0.9
+metallic_specular = 0.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_decor"]
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+roughness = 0.9
+metallic_specular = 0.3
+
+[node name="Island" type="Node3D"]
+script = ExtResource("1_gen")
+pine_scene = ExtResource("2_pine")
+palm_scene = ExtResource("3_palm")
+rock_scene = ExtResource("4_rock")
+bush_scene = ExtResource("5_bush")
+boat_scene = ExtResource("6_boat")
+buoy_scene = ExtResource("7_buoy")
+
+[node name="Terrain" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_terrain")
+
+[node name="TerrainBody" type="StaticBody3D" parent="Terrain"]
+collision_layer = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/TerrainBody"]
+
+[node name="NavRegion" type="NavigationRegion3D" parent="."]
+
+[node name="Props" type="Node3D" parent="."]
+
+[node name="Grass" type="MultiMeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_decor")
+
+[node name="Flowers" type="MultiMeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_decor")
+
+[node name="Decor" type="Node3D" parent="."]

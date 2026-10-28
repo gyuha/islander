@@ -1,0 +1,36 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/crab.gd" id="1_crab"]
+[ext_resource type="Script" path="res://scripts/vendor/gdskills/smart_navigation_agent.gd" id="2_nav"]
+[ext_resource type="PackedScene" path="res://assets/models/crab/crab.glb" id="3_model"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(0.8, 0.4, 0.6)
+
+[node name="Crab" type="CharacterBody3D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_crab")
+max_hp = 40
+move_speed = 1.5
+chase_speed = 3.2
+attack_range = 1.2
+attack_damage = 12.0
+attack_cooldown = 1.5
+hurt_time = 0.25
+knockback_speed = 2.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.2, 0)
+shape = SubResource("BoxShape3D_1")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Model" parent="Visual" instance=ExtResource("3_model")]
+rotation = Vector3(0, 1.5708, 0)
+
+[node name="Nav" type="NavigationAgent3D" parent="."]
+script = ExtResource("2_nav")
+
+[node name="RepathTimer" type="Timer" parent="."]
+wait_time = 0.2

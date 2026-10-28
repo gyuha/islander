@@ -1,0 +1,33 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/recipe_row.gd" id="1_row"]
+[ext_resource type="PackedScene" path="res://scenes/ui/slot_widget.tscn" id="2_slot"]
+
+[node name="RecipeRow" type="HBoxContainer"]
+theme_override_constants/separation = 10
+script = ExtResource("1_row")
+
+[node name="Result" parent="." instance=ExtResource("2_slot")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Info" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameLabel" type="Label" parent="Info"]
+layout_mode = 2
+theme_type_variation = &"BoldLabel"
+
+[node name="Ingredients" type="RichTextLabel" parent="Info"]
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="CraftButton" type="Button" parent="."]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+focus_mode = 0
+text = "제작"

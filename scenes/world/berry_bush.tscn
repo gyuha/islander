@@ -1,0 +1,26 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/harvestable.gd" id="1_harv"]
+[ext_resource type="PackedScene" path="res://assets/models/berry_bush/berry_bush.glb" id="9_model"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1"]
+height = 1.0
+radius = 0.7
+
+[node name="BerryBush" type="Area3D"]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_harv")
+prompt_message = "E: 베리 따기"
+item_id = &"berry"
+preferred_tool = &""
+respawn_sec = 60.0
+harvest_by_hit = false
+deplete_node_name = "Berries"
+
+[node name="InteractShape" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.5, 0)
+shape = SubResource("CylinderShape3D_1")
+
+[node name="Model" parent="." instance=ExtResource("9_model")]

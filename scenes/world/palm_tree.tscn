@@ -1,0 +1,36 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/harvestable.gd" id="1_harv"]
+[ext_resource type="PackedScene" path="res://assets/models/palm_tree/palm_tree.glb" id="9_model"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1"]
+height = 2.0
+radius = 0.9
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2"]
+height = 2.0
+radius = 0.3
+
+[node name="PalmTree" type="Area3D"]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_harv")
+prompt_message = "클릭: 나무 베기"
+item_id = &"wood"
+preferred_tool = &"axe"
+respawn_sec = 90.0
+
+[node name="InteractShape" type="CollisionShape3D" parent="."]
+position = Vector3(0, 1.0, 0)
+shape = SubResource("CylinderShape3D_1")
+
+[node name="Blocker" type="StaticBody3D" parent="."]
+collision_layer = 1
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Blocker"]
+position = Vector3(0, 1.0, 0)
+shape = SubResource("CylinderShape3D_2")
+
+[node name="Model" parent="." instance=ExtResource("9_model")]

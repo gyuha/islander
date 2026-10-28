@@ -1,0 +1,14 @@
+# Godot
+.godot/
+/android/
+*.translation
+
+# 생성물
+captures/*.png
+
+# 출처 불명 참조 이미지(공개 저장소에 재배포하지 않음)
+assets/concept/reference.webp
+assets/concept/reference.webp.import
+
+# OS
+.DS_Store

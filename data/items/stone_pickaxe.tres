@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://scripts/vendor/gdskills/item_data.gd" id="1_item"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/stone_pickaxe.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1_item")
+id = &"stone_pickaxe"
+icon = ExtResource("2_icon")
+name = "돌곡괭이"
+stackable = false
+max_stack = 1
+weight = 3.0
+tool_type = &"pickaxe"
+tool_tier = 1
+damage = 8
+reach = 1.8

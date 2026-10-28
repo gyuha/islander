@@ -1,0 +1,7 @@
+{
+  "recipes": [
+    { "id": "stone_axe",     "result": "stone_axe",     "amount": 1, "ingredients": { "wood": 3, "stone": 2 } },
+    { "id": "stone_pickaxe", "result": "stone_pickaxe", "amount": 1, "ingredients": { "wood": 3, "stone": 3 } },
+    { "id": "wooden_spear",  "result": "wooden_spear",  "amount": 1, "ingredients": { "wood": 4 } }
+  ]
+}
